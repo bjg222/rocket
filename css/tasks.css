@@ -1,0 +1,178 @@
+@CHARSET "US-ASCII";
+
+div {
+	/*outline: 1px dotted orange;*/
+}
+
+.task:first-child {
+	
+}
+
+.task {
+	padding: 5px 15px;
+	border-bottom: 1px solid grey;
+	font-family: sans-serif;
+	font-size: 16px;
+}
+
+.task:hover {
+	background-color: #EEE;
+}
+
+.task.expanded {
+	background-color: #F2F9FF;
+}
+
+.task.expanded:hover {
+	background-color: auto;
+}
+
+.task:last-child {
+	border: none;
+}
+
+.task:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.task div {
+	/* float: left; */
+	margin: 0 5px;
+}
+
+.task .empty {
+	color: lightgray;
+	font-style: italic;
+}
+
+.task .value,
+.task .action {
+	margin: 0;
+	padding: 0.15em 0.08em 0;
+}
+
+.task .id {
+	display: none;
+}
+
+.task .buttons {
+	float: left;
+}
+
+.task .done {
+	float: left;
+}
+
+.task .priority {
+	float: left;
+	padding: 2px;
+	/*margin-top: 2px;*/
+	font-size: 0.7em;
+}
+
+.task .priority.now {
+	background-color: #E68080;
+	color: #FF0000;
+}
+
+.task .priority.next {
+	background-color: #FFC266;
+	color: #CC7A00;
+}
+
+.task .priority.later {
+	background-color: #FFFF80;
+	color: #B8B800;
+}
+
+.task .priority.soon {
+	background-color: #3333FF;
+	color: #0000A3;
+}
+
+.task .priority.eventually {
+	background-color: #66A3FF;
+	color: #2952CC;
+}
+
+.task .priority.someday {
+	background-color: #C2C2D6;
+	color: #6600CC;
+}
+
+.task .priority.waiting {
+	background-color: #E6E6E6;
+	color: #737373;
+}
+
+.task .due {
+	float: right;
+	min-width: 25px;
+}
+
+.task .due .value {
+	float: right;
+}
+
+.task .due .action {
+	display: block;
+	visibility: hidden;
+ 	float: right;
+/*	margin: 0 0 0 3px;
+	padding: 0; */
+}
+
+.task.expanded .due .action {
+	visibility: visible;
+}
+
+/* .task .due.null {
+	visibility: hidden;
+} */
+
+/* .task .due.null div:after {
+	content: none;
+} */
+
+.task .title {
+	float: none;
+}
+
+.task .title .value {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.task .title:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.task .details {
+	float: left;
+	display: none;
+	margin: 0px;
+	padding: 0px;
+	font-size: 0.8em;
+	width: 100%;
+}
+
+.task .details:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.task.expanded .details {
+	display: initial;
+	margin-top: 6px;
+}
+
+.task .notes {
+	padding-left: 60px;
+	line-height: 1.2;
+}

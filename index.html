@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Rocket</title>
+<!-- <link href='http://fonts.googleapis.com/css?family=Khula:400,300|Merriweather+Sans' rel='stylesheet' type='text/css'>  -->
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<link rel="stylesheet" type="text/css" href="css/dates.css">
+<link rel="stylesheet" type="text/css" href="css/tasks.css">
+<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="js/moment-2.9.0.js"></script>
+<!-- <script type="text/javascript" src="js/moment-timezone-0.3.0-2014j.js"></script> -->
+<script type="text/javascript" src="js/util.js"></script>
+<script type="text/javascript" src="js/page.js"></script>
+<script type="text/javascript" src="js/editable.js"></script>
+<script type="text/javascript" src="js/ajax.js"></script>
+<script type="text/javascript" src="js/cmds.js"></script>
+<script type="text/javascript" src="js/on.js"></script>
+<script type="text/javascript" src="js/load.js"></script>
+</head>
+
+<body>
+	<div id="actions">
+		<button id="all">All</button>
+		<button id="none">None</button>
+		<button id="add">Add</button>
+		<input type="text" id="addtitle" />
+	</div>
+	<div id="tasks">
+		<div class="task proto">
+			<div class="id">0</div>
+			<div class="buttons">
+				<button class="remove">X</button>
+			</div>
+			<div class="done">
+				<input type="checkbox" />
+			</div>
+			<div class="priority">
+				<div class="value editable"></div>
+			</div>
+			<div class="due">
+				<div class="action empty">D</div>
+				<div class="value editable date mdy slash">
+					<div class="year"></div>
+					<div class="month"></div>
+					<div class="day"></div>
+				</div>
+			</div>
+			<div class="title">
+				<div class="value editable">
+					<span class="empty">Add a title...</span>
+				</div>
+			</div>
+			<div class="details">
+				<div class="notes">
+					<div class="value editable">
+						<span class="empty">Add some notes...</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="data">
+		<ul id="priorities">
+			<li class="priority proto">
+				<span class="id"></span>
+				<span class="order"></span>
+				<span class="value"></span>
+			</li>
+		</ul>
+	</div>
+</body>
+
+</html>

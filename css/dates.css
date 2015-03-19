@@ -1,0 +1,55 @@
+@CHARSET "US-ASCII";
+
+.date {
+	
+}
+
+.date:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.date .year,
+.date .month,
+.date .day {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+.date.mdy .year,
+.date.dmy .year,
+.date.dmy .month {
+	float: right;
+}
+
+/* .date.mdy .month,
+.date.ymd .year,
+.date.ymd .month {
+	float: left;
+} */
+
+.date.slash .year:after,
+.date.slash .month:after,
+.date.slash .day:after {
+	content: "/";
+}
+
+.date.dash .year:after,
+.date.dash .month:after,
+.date.dash .day:after {
+	content: "-";
+}
+
+.date.mdy div.year:after,
+.date.dmy div.year:after,
+.date.ymd div.day:after {
+	content: none;
+}
+
+.date .year:empty:after,
+.date .month:empty:after,
+.date .day:empty:after {
+	content: none;
+} 
