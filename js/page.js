@@ -27,14 +27,16 @@ var page = (function($) {
 	function getTask(task) {
 		if ($.isNumeric(task))
 			return $('#tasks .task#id' + task);
+		if (typeof task === 'string')
+			return $('#tasks .task#' + task);
 		if (task instanceof jQuery && task.hasClass('task'))
 			return task;
 		if (task instanceof jQuery && task.parents('.task').exists())
 			return task.parents('.task');
-		if (task.id && $.isNumeric(task.id))
-			return $('#tasks .task#id' + task.id);
-		if (task.id)
-			return $('#tasks .task#' + task.id)
+		if ($.contains(document, task))
+			return getTask($(task));
+		if ('id' in task)
+			return getTask(task.id);
 		return $();
 	}
 	

@@ -67,7 +67,7 @@ var on = (function($, cmds) {
 	}
 	
 	function onRemove() {
-		if (confirm('Delete "' + ellipsize(getTaskTitle(this)) + '"'))
+		if (confirm('Delete "' + page.task.title.get(this).ellipsize() + '"'))
 			remove(getTaskId(this));
 	}
 	
