@@ -34,18 +34,6 @@ var on = (function($, cmds) {
 		func(retrier(func, success, failure));
 	}
 	
-	function fillTask(el, task) {	//TODO: put this in page
-		el.find('.done :checkbox').prop('checked', task.done);
-		el.find('.id').text(task.id);
-//		el.find('.priority').addClass(task.priority.toLowerCase()).find('.value').text(task.priority.capitalizeWords());
-		page.task.priority.set(el, task.priority);
-		if (task.title)
-			el.find('.title').find('.value').text(task.title);
-		if (task.notes)
-			el.find('.notes').find('.value').text(task.notes);
-		page.task.due.set(el, task.due);
-	}
-	
 	function fillPriority(el, priority) {	//TODO: put this in page
 		el.find('.id').text(priority.id);
 		el.find('.order').text(priority.ordinal);
@@ -139,7 +127,7 @@ var on = (function($, cmds) {
 	
 		
 	function getTasks(after) {
-		doTries(cmds.getAll, function(t) { appendTasks(t); if (after) after(); });
+		doTries(cmds.getAll, function(t) { updateTasks(t); if (after) after(); });
 	}
 	
 	function getTask(id, after) {
@@ -150,25 +138,16 @@ var on = (function($, cmds) {
 		doTries(cmds.priorities.get, function(p) { savePriorities(p); if (after) after(); });
 	}
 	
-	function appendTasks(tasks) {
-		if (!$.isArray(tasks))
-			tasks = [tasks];
-		$.each(tasks, function(i, task) {
-			var t = $('#tasks #id' + task.id);
-			if (!t.length)
-				t = $('.task.proto').clone(true).removeClass('proto').attr('id', 'id' + task.id).appendTo('#tasks');
-			fillTask(t, task);
-		});
-	}
-	
 	function updateTasks(tasks) {
 		if (!$.isArray(tasks))
 			tasks = [tasks];
-		$.each(tasks, function(i, task) {
-			var t = $('#tasks #id' + task.id);
-			if (t.length)
-				fillTask(t, task);
+		$.each(tasks, function(i,t) {
+			if (page.task.exists(t))
+				page.task.update(t, t);
+			else
+				page.task.add(t);
 		});
+		page.task.sort();
 	}
 	
 	function savePriorities(priorities) {
@@ -199,7 +178,7 @@ var on = (function($, cmds) {
 	}
 	
 	function addTask(title) {
-		doTries(function(cb) { cmds.add(cb, title); }, appendTasks);
+		doTries(function(cb) { cmds.add(cb, title); }, updateTasks);
 	}
 	
 	function expandTask(id) {
