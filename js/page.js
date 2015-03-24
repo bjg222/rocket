@@ -109,37 +109,6 @@ var page = (function($) {
 		return compareDates(getTaskAdded(a), getTaskAdded(b));
 	}
 	
-	function a(a,b) {
-		if (getPriorityOrder(getTaskPriority(a)) < getPriorityOrder(getTaskPriority(b)))
-			return -1;
-		if (getPriorityOrder(getTaskPriority(a)) > getPriorityOrder(getTaskPriority(b)))
-			return 1;
-		if (getTaskDone(a) && getTaskDone(b)) {
-			if (getTaskCompleted(a) < getTaskCompleted(b) || (getTaskCompleted(a).isValid() && !getTaskCompleted(b).isValid()))
-				return -1;
-			if (getTaskCompleted(a) > getTaskCompleted(b) || (!getTaskCompleted(a).isValid() && getTaskCompleted(b).isValid()))
-				return 1;
-			if (getTaskAdded(a) < getTaskAdded(b) || (getTaskAdded(a).isValid() && !getTaskAdded(b).isValid()))
-				return -1;
-			if (getTaskAdded(a) > getTaskAdded(b) || (!getTaskAdded(a).isValid() && getTaskAdded(b).isValid()))
-				return 1;
-			if (getTaskDue(a) < getTaskDue(b) || (getTaskDue(a).isValid() && !getTaskDue(b).isValid()))
-				return -1;
-			if (getTaskDue(a) > getTaskDue(b) || (!getTaskDue(a).isValid() && getTaskDue(b).isValid()))
-				return 1;
-		} else {
-			if (getTaskDue(a) < getTaskDue(b) || (getTaskDue(a).isValid() && !getTaskDue(b).isValid()))
-				return -1;
-			if (getTaskDue(a) > getTaskDue(b) || (!getTaskDue(a).isValid() && getTaskDue(b).isValid()))
-				return 1;
-			if (getTaskAdded(a) < getTaskAdded(b) || (getTaskAdded(a).isValid() && !getTaskAdded(b).isValid()))
-				return -1;
-			if (getTaskAdded(a) > getTaskAdded(b) || (!getTaskAdded(a).isValid() && getTaskAdded(b).isValid()))
-				return 1;
-		}
-		return 0;
-	}
-	
 	function setTaskId(task, id) {
 		if ($.isNumeric(id)) {
 			task.attr('id', 'id' + id);
@@ -306,20 +275,22 @@ var page = (function($) {
 	var ret = {
 		task: {
 			add: addTask,
-			update: function (t, v) { return updateTask(getTask(t), v); },
+			update: function(t, v) { return updateTask(getTask(t), v); },
 			exists: isTask,
 			sort: sortTasks,
 			id: {
-				get: function (t) { return getTaskId(getTask(t)); },
-				set: function (t, v) { return setTaskId(getTask(t), v); },
+				get: function(t) { return getTaskId(getTask(t)); },
+				set: function(t, v) { return setTaskId(getTask(t), v); },
 			},
 			done: {
-				get: function (t) { return getTaskDone(getTask(t)); },
-				set: function (t, v) { return setTaskDone(getTask(t), v); },
+				get: function(t) { return getTaskDone(getTask(t)); },
+				set: function(t, v) { return setTaskDone(getTask(t), v); },
+				done: function(t) { return setTaskDone(t, true); },
+				undone: function(t) { return setTaskDone(t, false); },
 			},
 			title: {
-				get: function (t) { return getTaskTitle(getTask(t)); },
-				set: function (t, v) { return setTaskTitle(getTask(t), v); },
+				get: function(t) { return getTaskTitle(getTask(t)); },
+				set: function(t, v) { return setTaskTitle(getTask(t), v); },
 			},
 			priority: {
 				get: function(t) { return getTaskPriority(getTask(t)); },
@@ -330,8 +301,8 @@ var page = (function($) {
 				set: function(t, v) { return setTaskDue(getTask(t), v); },
 			},
 			notes: {
-				get: function (t) { return getTaskNotes(getTask(t)); },
-				set: function (t, v) { return setTaskNotes(getTask(t), v); },
+				get: function(t) { return getTaskNotes(getTask(t)); },
+				set: function(t, v) { return setTaskNotes(getTask(t), v); },
 			},
 		},
 		data: {

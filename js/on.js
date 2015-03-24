@@ -54,13 +54,6 @@ var on = (function($, cmds) {
 		return e.find('.title').text();
 	}
 	
-	function ellipsize(str, len) {	//TODO: put this in util
-		if (!len)
-			len = 20;
-		if (str.length > len)
-			return str.substring(0, len) + '...';
-		return str;
-	}
 	
 	
 	
@@ -162,7 +155,7 @@ var on = (function($, cmds) {
 	}
 	
 	function setDone(id, val) {
-		doTries(function(cb) { (val ? cmds.complete(cb, id) : cmds.uncomplete(cb, id)); }, function() { markDoneCheckbox(id, val); }, function() { markDoneCheckbox(id, !val); });
+		doTries(function(cb) { (val ? cmds.complete(cb, id) : cmds.uncomplete(cb, id)); }, function() { getTask(id); }); //function() { markDoneCheckbox(id, val); }, function() { markDoneCheckbox(id, !val); });
 	}
 	
 	function markDoneCheckbox(id, val) {
